@@ -1,0 +1,31 @@
+﻿@model List<WebsiteBanHang.Context.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section-content padding-y">
+    <div class="container">
+
+        <nav class="row">
+            @foreach (var item in Model)
+            {
+            <div class="col-md-3">
+                <div class="card card-category" style="width: 18rem;">
+                    <img src="~/Content/images/category/@item.Avatar" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="@Url.Action("ProductCategory", "Category", new {Id=item.Id})">@item.Name</a></h5>
+                       
+                    </div>
+                </div>
+            </div> <!-- col.// -->
+            }
+
+
+        </nav> <!-- row.// -->
+
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
