@@ -35,9 +35,9 @@
                             <th>
                                @Html.DisplayNameFor(model => model.ShortDes)
                              </th>
-                            <th>
+                            @*<th>
                                 @Html.DisplayNameFor(model => model.FullDescription)
-                            </th>
+                            </th>*@
                              <th>
                                 @Html.DisplayNameFor(model => model.Price)
                             </th>
@@ -85,9 +85,9 @@
                                 <td>
                                     @Html.DisplayFor(model => model.ShortDes)
                                 </td>
-                                <td>
+                                @*<td>
                                     @Html.DisplayFor(model => model.FullDescription)
-                                </td>
+                                </td>*@
                                 <td>
                                     @Html.DisplayFor(model => model.Price)
                                 </td>
@@ -110,12 +110,12 @@
                                 @*<td>
                                @Html.DisplayFor(modelItem => item.DisplayOrder)
                         </td>*@
-                                @*<td>
-                            @Html.DisplayFor(modelItem => item.CreatedOnUtc)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UpdatedOnUtc)
-                        </td>*@
+                                <td>
+                                     @Html.DisplayFor(model => model.CreatedOnUtc)
+                                 </td>
+                                 <td>
+                                      @Html.DisplayFor(model => model.UpdatedOnUtc)
+                                </td>
                                 
                             </tr>
    

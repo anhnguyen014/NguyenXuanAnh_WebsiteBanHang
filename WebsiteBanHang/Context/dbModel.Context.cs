@@ -12,6 +12,8 @@ namespace WebsiteBanHang.Context
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class WebsiteBanHangEntities : DbContext
     {
@@ -30,5 +32,69 @@ namespace WebsiteBanHang.Context
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<User> Users { get; set; }
+    
+        public virtual ObjectResult<Products_SearchProducts_Result> Products_SearchProducts(string contactName)
+        {
+            var contactNameParameter = contactName != null ?
+                new ObjectParameter("ContactName", contactName) :
+                new ObjectParameter("ContactName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Products_SearchProducts_Result>("Products_SearchProducts", contactNameParameter);
+        }
+    
+        public virtual ObjectResult<Product> SearchProducts(string contactName)
+        {
+            var contactNameParameter = contactName != null ?
+                new ObjectParameter("ContactName", contactName) :
+                new ObjectParameter("ContactName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Product>("SearchProducts", contactNameParameter);
+        }
+    
+        public virtual ObjectResult<Product> SearchProducts(string contactName, MergeOption mergeOption)
+        {
+            var contactNameParameter = contactName != null ?
+                new ObjectParameter("ContactName", contactName) :
+                new ObjectParameter("ContactName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Product>("SearchProducts", mergeOption, contactNameParameter);
+        }
+        public class Pagers
+        {
+            public int TotalItems { get; private set; }
+            public int CurrentPage { get; private set; }
+            public int PageSize { get; private set; }
+            public int TotalPages { get; private set; }
+            public int StartPages { get; private set; }
+            public int EndPages { get; private set; }
+
+            public Pagers()
+            {
+
+            }
+            public Pagers(int totalItems, int page, int pageSize = 10)
+            {
+                int totalPages = (int)Math.Ceiling((decimal)totalItems / (decimal)pageSize);
+                int currentPage = page;
+
+                int startPage = currentPage - 5;
+                int endPage = currentPage + 4;
+
+                if (endPage > totalPages)
+                {
+                    currentPage = totalPages;
+                    if (endPage > 10)
+                    {
+                        startPage = endPage - 9;
+                    }
+                }
+                TotalItems = totalItems;
+                CurrentPage = currentPage;
+                PageSize = pageSize;
+                TotalPages = totalPages;
+                StartPages = startPage;
+                EndPages = endPage;
+            }
+        }
     }
 }

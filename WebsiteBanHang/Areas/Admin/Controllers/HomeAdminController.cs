@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using WebsiteBanHang.Context;
 
 namespace WebsiteBanHang.Areas.Admin.Controllers
 {
@@ -13,5 +16,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
         {
             return View();
         }
+      
     }
+
 }

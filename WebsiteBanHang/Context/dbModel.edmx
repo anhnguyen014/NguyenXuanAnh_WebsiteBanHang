@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WebsiteBanHangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WebsiteBanHangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Brand">
           <Key>
             <PropertyRef Name="Id" />
@@ -76,6 +76,9 @@
           <Property Name="Password" Type="varchar" MaxLength="50" />
           <Property Name="IsAdmin" Type="bit" />
         </EntityType>
+        <Function Name="Products_SearchProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ContactName" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="WebsiteBanHangModelStoreContainer">
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -83,8 +86,7 @@
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WebsiteBanHangModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -165,7 +167,31 @@
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <FunctionImport Name="Products_SearchProducts" ReturnType="Collection(WebsiteBanHangModel.Products_SearchProducts_Result)">
+          <Parameter Name="ContactName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SearchProducts" EntitySet="Products" ReturnType="Collection(WebsiteBanHangModel.Product)">
+            <Parameter Name="ContactName" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="Products_SearchProducts_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Avatar" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CategoryId" Nullable="true" />
+          <Property Type="String" Name="ShortDes" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FullDescription" Nullable="true" MaxLength="500" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Double" Name="PriceDiscount" Nullable="true" />
+          <Property Type="Int32" Name="TypeId" Nullable="true" />
+          <Property Type="String" Name="Slug" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="BrandId" Nullable="true" />
+          <Property Type="Boolean" Name="Deleted" Nullable="true" />
+          <Property Type="Boolean" Name="ShowOnHomePage" Nullable="true" />
+          <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOnUtc" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedOnUtc" Nullable="true" Precision="23" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -248,6 +274,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Products_SearchProducts" FunctionName="WebsiteBanHangModel.Store.Products_SearchProducts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebsiteBanHangModel.Products_SearchProducts_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ShortDes" ColumnName="ShortDes" />
+                <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PriceDiscount" ColumnName="PriceDiscount" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="ShowOnHomePage" ColumnName="ShowOnHomePage" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="CreatedOnUtc" ColumnName="CreatedOnUtc" />
+                <ScalarProperty Name="UpdatedOnUtc" ColumnName="UpdatedOnUtc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SearchProducts" FunctionName="WebsiteBanHangModel.Store.Products_SearchProducts" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
