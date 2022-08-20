@@ -17,10 +17,10 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    <strong class="text-danger text-uppercase">THÊM SẢN PHẨM</strong>
+                    <strong class="text-danger text-uppercase">CẬP NHẬT SẢN PHẨM</strong>
                 </div>
                 <div class="col-md-6 text-right">
-                    <button class="btn btn-sm btn-warning" type="submit" name="create"><i class="fas fa-save"></i>Lưu[Thêm]</button>
+                    <button class="btn btn-sm btn-warning" type="submit" name="create"><i class="fas fa-save"></i>Lưu[Cập nhật]</button>
                     <a href="@Url.Action("Index","Products")" class="btn btn-sm btn-info"><i class="fas fa-long-arrow-alt-left"></i>Trở Về Danh Sách</a>
                 </div>
             </div>
@@ -74,9 +74,9 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.FullDescription, htmlAttributes: new { @class = "control-label col-md-2" })
 
-                        @Html.TextAreaFor(model => model.FullDescription, new { htmlAttributes = new { @class = "form-control", @id = "FullDescription" } })
+                        @Html.TextAreaFor(model => model.FullDescription, new { htmlAttributes = new { @class = "form-control", @id = "FullDescription",@rows="3" } })
                         <script type="text/javascript" lang="javascript">
-                        CKEDITOR.replace("FullDescription");
+                              CKEDITOR.replace("FullDescription");
                         </script>
                         @Html.ValidationMessageFor(model => model.FullDescription, "", new { @class = "text-danger" })
 

@@ -1,0 +1,163 @@
+﻿@model WebsiteBanHang.Context.Product
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+    <section class="content my-3">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong style="color:red">XÁC NHẬN XÓA SẢN PHẨM</strong>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="@Url.Action("Edit","Product",  new { id = Model.Id })" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i>Cập Nhật</a>
+                            <a href="@Url.Action("Trash","Product")" class="btn btn-sm btn-info"><i class="fas fa-long-arrow-alt-left"></i>Trở Về Danh Sách</a>
+                            <button class="btn btn-sm btn-danger" type="submit"><i class="fas fa-trash-alt"></i>Xóa</button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th style="width:80px;color:red;text-align:center">Tiêu Đề</th>
+                        <th style="color:green;text-align:center">Nội Dung</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Avatar)
+                        </td>
+                        <td style="width:80px;">
+                            <img src="~/Content/images/items/@Model.Avatar" class="img-fluid" alt="#" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.CategoryId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.CategoryId)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ShortDes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.ShortDes)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.FullDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.FullDescription)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Price)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.PriceDiscount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.PriceDiscount)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.TypeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.TypeId)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Slug)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Slug)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.BrandId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.BrandId)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Deleted)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Deleted)
+                        </td>
+                    <tr>
+                        <td>
+                            <strong>Tạo Bởi</strong>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Create_By)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Ngày Cập Nhật</strong>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Update_At)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Cập Nhật Bởi</strong>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Update_By)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>@Html.DisplayNameFor(model => model.Status)</strong>
+                        </td>
+                        <td>@Html.DisplayFor(model => model.Status)</td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /.card-body -->
+
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+
+
+
+    

@@ -157,7 +157,6 @@
                     text-decoration: none;
                     background-color: #eeeeee;
                 }
-                \\
         .pager .next > a,
         .pager .next > span {
             float: right;
@@ -313,7 +312,7 @@
                             <td>
                                 <a href="@Url.Action("Details","Products",  new { id = item.Id })" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
                                 <a href="@Url.Action("Edit","Products",  new { id = item.Id })" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                                <a href="@Url.Action("DelTrash","Products", new { id = item.Id })" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="@Url.Action("Delete","Products", new { id = item.Id })" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     }
@@ -328,9 +327,8 @@
         <!-- /.card -->
 
     </section>
-
-    Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)of @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.currentFilter }))
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.currentFilter }))
+   
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->

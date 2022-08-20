@@ -110,5 +110,7 @@ namespace WebsiteBanHang.Controllers
             }
             return byte2String;
         }
+       
     }
+
 }

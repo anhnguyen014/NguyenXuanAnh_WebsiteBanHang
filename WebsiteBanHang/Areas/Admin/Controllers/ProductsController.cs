@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebsiteBanHang.Context;
@@ -111,7 +112,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
 
             return View(objWebsiteBanHangEntities.Products.Where(n=>n.Id==Id).FirstOrDefault());
         }
-
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult Edit(Product objProduct)
         {
@@ -132,6 +133,31 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
             objWebsiteBanHangEntities.SaveChanges();
             TempData["message"] = new XMessage("success", "Cập Nhật Thành Công!");
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult Delete(int? Id)
+        {
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var product = objWebsiteBanHangEntities.Products.Where(n=>n.Id==Id).FirstOrDefault();
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int Id)
+        {
+            var product = objWebsiteBanHangEntities.Products.Where(n => n.Id == Id).FirstOrDefault();
+            objWebsiteBanHangEntities.Products.Remove(product);
+            objWebsiteBanHangEntities.SaveChanges();
+            TempData["message"] = new XMessage("success", "Xóa Mẫu Tin Thành Công!");
+            return RedirectToAction("Delete", "Products");
         }
         void loadData()
         {
@@ -166,6 +192,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
             //convert to select list type value,text
             ViewBag.ProductType = objCommon.ToSelectList(dtProductType, "Id", "Name");
         }
+
     }
 }
 
