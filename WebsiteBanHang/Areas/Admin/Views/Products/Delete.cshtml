@@ -120,33 +120,35 @@
                         </td>
                     <tr>
                         <td>
-                            <strong>Tạo Bởi</strong>
+                            @Html.DisplayNameFor(model => model.ShowOnHomePage)
                         </td>
                         <td>
-                            @Html.DisplayFor(model => model.Create_By)
+                            @Html.DisplayFor(model => model.ShowOnHomePage)
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <strong>Ngày Cập Nhật</strong>
+                            @Html.DisplayNameFor(model => model.DisplayOrder)
                         </td>
                         <td>
-                            @Html.DisplayFor(model => model.Update_At)
+                            @Html.DisplayFor(model => model.DisplayOrder)
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <strong>Cập Nhật Bởi</strong>
+                            @Html.DisplayNameFor(model => model.CreatedOnUtc)
                         </td>
                         <td>
-                            @Html.DisplayFor(model => model.Update_By)
+                            @Html.DisplayFor(model => model.CreatedOnUtc)
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <strong>@Html.DisplayNameFor(model => model.Status)</strong>
+                            @Html.DisplayNameFor(model => model.UpdatedOnUtc)
                         </td>
-                        <td>@Html.DisplayFor(model => model.Status)</td>
+                        <td>
+                            @Html.DisplayFor(model => model.UpdatedOnUtc)
+                        </td>
                     </tr>
                 </table>
             </div>

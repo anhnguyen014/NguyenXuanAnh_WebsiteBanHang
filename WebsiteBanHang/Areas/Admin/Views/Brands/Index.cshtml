@@ -1,10 +1,12 @@
 ﻿@using PagedList;
 @using PagedList.Mvc;
-@model PagedList.IPagedList<WebsiteBanHang.Context.Product>
+@model PagedList.IPagedList<WebsiteBanHang.Context.Brand>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    
+
 }
 
 <style>
@@ -184,15 +186,15 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <strong class="text-danger">TẤT CẢ SẢN PHẨM</strong>
+                        <strong class="text-danger">TẤT CẢ THƯƠNG HIỆU</strong>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="@Url.Action("Create","Products")" class="btn btn-sm btn-success"><i class="fas fa-plus"></i>Thêm</a>
-                        <a href="@Url.Action("Trash","Products")" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>Thùng Rác</a>
+                        <a href="@Url.Action("Create","Brands")" class="btn btn-sm btn-success"><i class="fas fa-plus"></i>Thêm</a>
+                        <a href="@Url.Action("Trash","Brands")" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>Thùng Rác</a>
                     </div>
                 </div>
             </div>
-            @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+            @using (Html.BeginForm("Index", "Brands", FormMethod.Get))
             {
                 <span>Tim san pham:</span> @Html.TextBox("SearchText")
                 <input type="submit" value="Search" />
@@ -208,33 +210,10 @@
                         <th>
                             @Html.DisplayNameFor(model => model.FirstOrDefault().Avatar)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().CategoryId)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().ShortDes)
-                        </th>
-                        @*<th>
-                        @Html.DisplayNameFor(model => model.FullDescription)
-                    </th>*@
-                        @*<th>
-                        @Html.DisplayNameFor(model => model.Price)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PriceDiscount)
-                    </th>*@
-                        <th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().TypeId)
-                        </th>
+                    
                         <th>
                             @Html.DisplayNameFor(model => model.FirstOrDefault().Slug)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().BrandId)
-                        </th>
-                        @*<th>
-                        @Html.DisplayNameFor(model => model.Deleted)
-                    </th>*@
                         <th>
                             @Html.DisplayNameFor(model => model.FirstOrDefault().ShowOnHomePage)
                         </th>
@@ -262,40 +241,16 @@
                                 <img src="~/Content/images/items/@item.Avatar" class="img-fluid" alt="#" />
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.CategoryId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ShortDes)
-                            </td>
-                            @*<td>
-                            @Html.DisplayFor(modelItem => item.FullDescription)
-                        </td>*@
-                            @*<td>
-                            @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PriceDiscount)
-                        </td>*@
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TypeId)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(modelItem => item.Slug)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.BrandId)
-                            </td>
-                            @*<td>
-                                @Html.DisplayFor(modelItem => item.Deleted)
-                        </td>*@
-                            <td>
                                 @if (item.ShowOnHomePage == true)
                                 {
-                                    <a href="@Url.Action("ShowOnPage","Products" , new { id = item.Id })" class="btn btn-sm btn-success "><i class="fas fa-toggle-on "></i></a>
+                                    <a href="@Url.Action("ShowOnPage","Brands" , new { id = item.Id })" class="btn btn-sm btn-success "><i class="fas fa-toggle-on "></i></a>
                                 }
                                 else
                                 {
-                                    <a href="@Url.Action("ShowOnPage","Products" , new { id = item.Id })" class="btn btn-sm btn-dark"><i class="fas fa-toggle-off"></i></a>
+                                    <a href="@Url.Action("ShowOnPage","Brands" , new { id = item.Id })" class="btn btn-sm btn-dark"><i class="fas fa-toggle-off"></i></a>
                                 }
                             </td>
                             @*<td>
@@ -308,9 +263,9 @@
                             @Html.DisplayFor(modelItem => item.UpdatedOnUtc)
                         </td>*@
                             <td>
-                                <a href="@Url.Action("Details","Products",  new { id = item.Id })" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
-                                <a href="@Url.Action("Edit","Products",  new { id = item.Id })" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                                <a href="@Url.Action("Delete","Products", new { id = item.Id })" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="@Url.Action("Details","Brands",  new { id = item.Id })" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
+                                <a href="@Url.Action("Edit","Brands",  new { id = item.Id })" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                <a href="@Url.Action("Delete","Brands", new { id = item.Id })" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     }

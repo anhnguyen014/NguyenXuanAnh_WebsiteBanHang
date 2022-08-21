@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using WebsiteBanHang.Context;
 
 namespace WebsiteBanHang
 {
@@ -54,5 +55,6 @@ namespace WebsiteBanHang
             public int Id { get; set; }
             public string Name { get; set; }
         }
+      
     }
 }
