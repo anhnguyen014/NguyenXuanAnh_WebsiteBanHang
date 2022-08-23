@@ -1,9 +1,10 @@
-﻿@model WebsiteBanHang.Context.Brand
+﻿@model WebsiteBanHang.Context.Category
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 <div class="content-wrapper">
     <section class="content my-3">
 
@@ -15,12 +16,12 @@
                     @Html.AntiForgeryToken()
                     <div class="row">
                         <div class="col-md-6">
-                            <strong style="color:red">XÁC NHẬN XÓA THƯƠNG HIỆU</strong>
+                            <strong style="color:red">CHI TIẾT DANH MỤC</strong>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="@Url.Action("Edit","Brands",  new { id = Model.Id })" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i>Cập Nhật</a>
-                            <a href="@Url.Action("Trash","Banhds")" class="btn btn-sm btn-info"><i class="fas fa-long-arrow-alt-left"></i>Trở Về Danh Sách</a>
-                            <button class="btn btn-sm btn-danger" type="submit"><i class="fas fa-trash-alt"></i>Xóa</button>
+                            <a href="@Url.Action("Edit","Categories",  new { id = Model.Id })" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i>Cập Nhật</a>
+                            <a href="@Url.Action("Index","Categories")" class="btn btn-sm btn-info"><i class="fas fa-long-arrow-alt-left"></i>Trở Về Danh Sách</a>
+                            
                         </div>
                     </div>
                 }
@@ -44,7 +45,7 @@
                             @Html.DisplayNameFor(model => model.Avatar)
                         </td>
                         <td style="width:80px;">
-                            <img src="~/Content/images/brand/@Model.Avatar" class="img-fluid" alt="#" />
+                            <img src="~/Content/images/category/@Model.Avatar" class="img-fluid" alt="#" />
                         </td>
                     </tr>
                     <tr>
@@ -55,6 +56,7 @@
                             @Html.DisplayFor(model => model.Slug)
                         </td>
                     </tr>
+                   
                     <tr>
                         <td>
                             @Html.DisplayNameFor(model => model.Deleted)
@@ -64,10 +66,10 @@
                         </td>
                     <tr>
                         <td>
-                            @Html.DisplayNameFor(model => model.ShowOnHomePage)
+                            @Html.DisplayNameFor(model => model.ShowOnHomPage)
                         </td>
                         <td>
-                            @Html.DisplayFor(model => model.ShowOnHomePage)
+                            @Html.DisplayFor(model => model.ShowOnHomPage)
                         </td>
                     </tr>
                     <tr>
@@ -103,7 +105,3 @@
 
     </section>
     <!-- /.content -->
-
-
-
-    

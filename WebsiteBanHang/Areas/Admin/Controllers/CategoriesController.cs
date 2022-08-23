@@ -15,15 +15,15 @@ using static WebsiteBanHang.Context.WebsiteBanHangEntities;
 
 namespace WebsiteBanHang.Areas.Admin.Controllers
 {
-    public class BrandsController : Controller
+    public class CategoriesController : Controller
 
     {
         WebsiteBanHangEntities objWebsiteBanHangEntities = new WebsiteBanHangEntities();
-        // GET: Admin/Brands
+        // GET: Admin/Categories
         [HttpGet]
         public ActionResult Index(string currentFilter,string SearchText,int? page)
         {
-            List<Brand> brands;
+            List<Category> categories;
             if(SearchText!=null)
             {
                 page = 1;
@@ -36,37 +36,37 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
             if(!string.IsNullOrEmpty(SearchText))
 
             {
-                brands = objWebsiteBanHangEntities.Brands.Where(p=>p.Name.Contains(SearchText)).ToList();
+                categories = objWebsiteBanHangEntities.Categories.Where(p=>p.Name.Contains(SearchText)).ToList();
             }        
             else
             {
-                brands = objWebsiteBanHangEntities.Brands.ToList();
+                categories = objWebsiteBanHangEntities.Categories.ToList();
             }
             ViewBag.CurrentFilter = SearchText;
             int pageSize = 4;
             int pageNumber = (page ?? 1);
-            brands = brands.OrderByDescending(n => n.Id).ToList();
-            return View(brands.ToPagedList(pageNumber,pageSize));
+            categories = categories.OrderByDescending(n => n.Id).ToList();
+            return View(categories.ToPagedList(pageNumber,pageSize));
         }
 
         public ActionResult Details(int Id)
         {
-            var objProduct = objWebsiteBanHangEntities.Brands.Where(n => n.Id == Id).FirstOrDefault();
-            return View(objProduct);
+            var objCate = objWebsiteBanHangEntities.Categories.Where(n => n.Id == Id).FirstOrDefault();
+            return View(objCate);
         }
         [HttpGet]
 
         public ActionResult Create()
         {
-           this.loadData();
+           //this.loadData();
             return View();
         }
         [ValidateInput(false)]
         [HttpPost]
 
-        public ActionResult Create(Brand objBrand)
+        public ActionResult Create(Category objCate)
         {
-            this.loadData();
+           // this.loadData();
             if (ModelState.IsValid)
             {
                 
@@ -78,19 +78,19 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
                 try
                 {
                    // this.loadData();
-                    if (objBrand.ImageUpload != null)
+                    if (objCate.ImageUpload != null)
                     {
-                        string fileName = Path.GetFileNameWithoutExtension(objBrand.ImageUpload.FileName);
+                        string fileName = Path.GetFileNameWithoutExtension(objCate.ImageUpload.FileName);
                         //tenhinh
-                        string extension = Path.GetExtension(objBrand.ImageUpload.FileName);
+                        string extension = Path.GetExtension(objCate.ImageUpload.FileName);
                         //png
                         fileName = fileName + extension;
                         //tenhinh.png
-                        objBrand.Avatar = fileName;
-                        objBrand.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/items"),fileName));
+                        objCate.Avatar = fileName;
+                        objCate.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/category"),fileName));
                     }
-                    objBrand.CreatedOnUtc = DateTime.Now;
-                    objWebsiteBanHangEntities.Brands.Add(objBrand);
+                    objCate.CreatedOnUtc = DateTime.Now;
+                    objWebsiteBanHangEntities.Categories.Add(objCate);
                     objWebsiteBanHangEntities.SaveChanges();
                     TempData["message"] = new XMessage("success", "Thêm Thành Công!");
                     return RedirectToAction("Index");
@@ -100,7 +100,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
                     return View();
                 }
             }
-            return View(objBrand);
+            return View(objCate);
 
         }
 
@@ -108,30 +108,29 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
 
         public ActionResult Edit(int Id)
         {
-            this.loadData();
-            var objBrands = objWebsiteBanHangEntities.Brands.Where(n => n.Id == Id).FirstOrDefault();
-            return View(objBrands);
+            //this.loadData();
+            var objCate = objWebsiteBanHangEntities.Categories.Where(n => n.Id == Id).FirstOrDefault();
+            return View(objCate);
         }
         [ValidateInput(false)]
         [HttpPost]
-        public ActionResult Edit(Brand objBrands)
+        public ActionResult Edit(Category category)
         {
             //this.loadData();
-            if (objBrands.ImageUpload != null)
+            if (category.ImageUpload != null)
             {
-                string fileName = Path.GetFileNameWithoutExtension(objBrands.ImageUpload.FileName);
+                string fileName = Path.GetFileNameWithoutExtension(category.ImageUpload.FileName);
                 //tenhinh
-                string extension = Path.GetExtension(objBrands.ImageUpload.FileName);
+                string extension = Path.GetExtension(category.ImageUpload.FileName);
                 //png
                 fileName = fileName + extension;
                 //tenhinh.png
-                objBrands.Avatar = fileName;
-                objBrands.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/items"), fileName));
+                category.Avatar = fileName;
+                category.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/category"), fileName));
             }
-           
-            objBrands.UpdatedOnUtc = DateTime.Now;
-           
-            objWebsiteBanHangEntities.Entry(objBrands).State = EntityState.Modified;
+
+            category.UpdatedOnUtc = DateTime.Now;
+            objWebsiteBanHangEntities.Entry(category).State = EntityState.Modified;
             objWebsiteBanHangEntities.SaveChanges();
             TempData["message"] = new XMessage("success", "Cập Nhật Thành Công!");
             return RedirectToAction("Index");
@@ -140,7 +139,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
         [HttpGet]
        public ActionResult Delete(int Id)
         {
-            this.DeleteBrand(Id);
+            this.DeleteCate(Id);
             return RedirectToAction("Index");
         }
         public ActionResult ShowOnPage(int? Id)
@@ -150,14 +149,14 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
                 TempData["message"] = new XMessage("danger", "Mã Nhà Cung Cấp Không Tồn Tại!");
                 return RedirectToAction("Index", "Brands");
             }
-            Brand brands = objWebsiteBanHangEntities.Brands.Where(n=>n.Id == Id).FirstOrDefault();
-            if (brands == null)
+            Category category = objWebsiteBanHangEntities.Categories.Where(n=>n.Id == Id).FirstOrDefault();
+            if (category == null)
             {
                 TempData["message"] = new XMessage("danger", "Mẫu Tin Không Tồn Tại!");
                 return RedirectToAction("Index", "Brands");
             }
-            brands.ShowOnHomePage = (brands.ShowOnHomePage == true) ? false : true;
-            objWebsiteBanHangEntities.Entry(brands).State = EntityState.Modified;
+            category.ShowOnHomPage = (category.ShowOnHomPage == true) ? false : true;
+            objWebsiteBanHangEntities.Entry(category).State = EntityState.Modified;
             objWebsiteBanHangEntities.SaveChanges();
             TempData["message"] = new XMessage("success", "Thay Đổi Trạng Thái Thành Công!");
             return RedirectToAction("Index", "Brands");
@@ -196,14 +195,14 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
             //convert to select list type value,text
             ViewBag.ProductType = objCommon.ToSelectList(dtProductType, "Id", "Name");
         }
-        public bool DeleteBrand(int Id)
+        public bool DeleteCate(int Id)
         {
             using (var db = new WebsiteBanHangEntities())
             {
-                var brands = db.Brands.FirstOrDefault(x => x.Id == Id);
-                if (brands != null)
+                var category = db.Categories.FirstOrDefault(x => x.Id == Id);
+                if (category != null)
                 {
-                    db.Brands.Remove(brands);
+                    db.Categories.Remove(category);
                     db.SaveChanges();
                     return true;
                 }
