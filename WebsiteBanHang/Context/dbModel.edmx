@@ -170,8 +170,8 @@
           <FunctionImport Name="SearchProducts" EntitySet="Products" ReturnType="Collection(WebsiteBanHangModel.Product)">
           <Parameter Name="ContactName" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="OrderDetails" EntityType="WebsiteBanHangModel.OrderDetail" />
           <EntitySet Name="Orders" EntityType="WebsiteBanHangModel.Order" />
+          <EntitySet Name="OrderDetails" EntityType="WebsiteBanHangModel.OrderDetail" />
         </EntityContainer>
         <ComplexType Name="Products_SearchProducts_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -191,15 +191,6 @@
           <Property Type="DateTime" Name="CreatedOnUtc" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="UpdatedOnUtc" Nullable="true" Precision="23" />
         </ComplexType>
-        <EntityType Name="OrderDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrdersId" Type="Int32" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="Id" />
@@ -209,6 +200,15 @@
           <Property Name="UserId" Type="Int32" />
           <Property Name="Status" Type="Int32" />
           <Property Name="CreatedOnUtc" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrdersId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -303,16 +303,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SearchProducts" FunctionName="WebsiteBanHangModel.Store.Products_SearchProducts" />
-          <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="WebsiteBanHangModel.OrderDetail">
-              <MappingFragment StoreEntitySet="OrderDetails">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="OrdersId" ColumnName="OrdersId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="WebsiteBanHangModel.Order">
               <MappingFragment StoreEntitySet="Orders">
@@ -320,6 +310,16 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="WebsiteBanHangModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="OrdersId" ColumnName="OrdersId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
