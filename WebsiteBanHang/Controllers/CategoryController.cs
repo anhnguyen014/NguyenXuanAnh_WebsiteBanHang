@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebsiteBanHang.Context;
+using PagedList;
 
 namespace WebsiteBanHang.Controllers
 {
@@ -16,10 +17,14 @@ namespace WebsiteBanHang.Controllers
             var listCategory = objWebsiteBanHangEntities.Categories.ToList();
             return View(listCategory);
         }
-        public ActionResult ProductCategory( int Id)
+        public ActionResult ProductCategory( int Id, int? page)
         {
-            var listProduct= objWebsiteBanHangEntities.Products.Where(n=>n.CategoryId== Id).ToList();
-            return View(listProduct);
+            if(page == null)
+                page = 1;
+            var listProduct = (from l in objWebsiteBanHangEntities.Products.Where(n => n.CategoryId == Id).OrderBy(n => n.Id) select l);
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            return View(listProduct.ToPagedList(pageNumber,pageSize));
         }
     }
 }

@@ -8,8 +8,6 @@
     List<Product> result = new List<Product>();
 }
 
-<h2 class="text-danger">Tìm kiếm "@key"</h2>
-
 @{ if (string.IsNullOrEmpty(key))
     {
         <h3>Vui long nhap</h3>
@@ -23,7 +21,7 @@
         else
         {
             result = new ProductDao().SearchByKey(key);
-            <div class="row row-sm">
+            <div class="row row-sm mt-4">
                 @foreach (var item in result)
                 {
                     <div class="col-xl-2 col-lg-3 col-md-4 col-6">
@@ -32,7 +30,7 @@
                             <figcaption class="info-wrap">
                                 @*<a href="#" class="title">@item.Name</a>*@
                                 @Html.ActionLink(item.Name, "Detail", "Product", new { Id = item.Id }, null)
-                                <div class="price mt-1">@item.Price</div> <!-- price-wrap.// -->
+                                <div class="price mt-1">@String.Format("{0:N0}", @item.Price)</div> <!-- price-wrap.// -->
                             </figcaption>
                         </div>
                     </div> <!-- col.// -->

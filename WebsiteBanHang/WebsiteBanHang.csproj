@@ -191,6 +191,7 @@
     <Compile Include="Library\XMessage.cs" />
     <Compile Include="Models\BrandMasterData.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\CategoryDao.cs" />
     <Compile Include="Models\CategoryMasterData.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\Pagers.cs" />
