@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using WebsiteBanHang.Context;
 using WebsiteBanHang.Models;
 namespace WebsiteBanHang.Controllers
@@ -10,8 +11,7 @@ namespace WebsiteBanHang.Controllers
     public class CartController : Controller
     {
         WebsiteBanHangEntities objWebsiteBanHangEntities = new WebsiteBanHangEntities();
-        // GET: Cart
-        public ActionResult Index()
+      public ActionResult Index()
         {
             return View((List<CartItem>)Session["cart"]);
         }
@@ -46,6 +46,7 @@ namespace WebsiteBanHang.Controllers
             }
             return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
         }
+
 
         private int isExist(int id)
         {

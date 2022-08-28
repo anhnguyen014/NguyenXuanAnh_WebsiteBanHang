@@ -28,6 +28,7 @@
             return false;
         });
     });
+    
 </script>
 
 <section class="section-content padding-y">
@@ -43,6 +44,8 @@
                                 <th scope="col">Product</th>
                                 <th scope="col" width="120">Quantity</th>
                                 <th scope="col" width="120">Price</th>
+                                <th scope="col" width="120">PriceDiscount</th>
+                                <th scope="col" width="120">Total</th>
                                 <th scope="col" class="text-right" width="200"> </th>
                             </tr>
                         </thead>
@@ -51,31 +54,44 @@
                             {
                                 foreach (var item in Model)
                                 {
-                                    <tr id="product-@item.Product.Id">
-                                        <td>
-                                            <figure class="itemside">
-                                                <div class="aside"><img src="~/Content/images//items/@item.Product.Avatar" class="img-sm"></div>
-                                                <figcaption class="info">
-                                                    <a href="#" class="title text-dark">@item.Product.Name </a>
-                                                    <p class="text-muted small">Size: XL, Color: blue, <br> Brand: Gucci</p>
-                                                </figcaption>
-                                            </figure>
-                                        </td>
-                                        <td>
-                                            <input type="text" value="@item.Quantity" />
-                                        </td>
-                                        <td>
-                                            <div class="price-wrap">
-                                                <var class="price">@item.Product.Price</var>
-                                                <small class="text-muted"> $315.20 each </small>
-                                            </div> <!-- price-wrap .// -->
-                                        </td>
-                                        <td class="text-right">
-                                            <input type="hidden" value="@item.Product.Id" id="productid" />
-                                            <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
-                                            <a href="" class="btn btn-light" id="removecart"> Remove</a>
-                                        </td>
-                                    </tr>
+                            <tr id="product-@item.Product.Id">
+                                <td>
+                                    <figure class="itemside">
+                                        <div class="aside"><img src="~/Content/images//items/@item.Product.Avatar" class="img-sm"></div>
+                                        <figcaption class="info">
+                                            <a href="#" class="title text-dark">@item.Product.Name </a>
+                                            <p class="text-muted small">Size: XL, Color: blue, <br> Brand: Gucci</p>
+                                        </figcaption>
+                                    </figure>
+                                </td>
+                                <td>
+                                    <input type="text" value="@item.Quantity" />
+                                </td>
+                                <td>
+                                    <div class="price-wrap">
+                                        <var class="price">@(String.Format("{0:N0}", @item.Product.Price))</var>
+
+                                    </div> <!-- price-wrap .// -->
+                                </td>
+                                <td>
+                                    <div class="price-wrap">
+                                        <var class="price">@(String.Format("{0:N0}", @item.Product.PriceDiscount))</var>
+
+                                    </div> <!-- price-wrap .// -->
+                                </td>
+                                <td>
+                                    <div class="price-wrap">
+                                        <var class="price">@(String.Format("{0:N0}", ((@item.Product.Price*item.Quantity)-(@item.Product.PriceDiscount * item.Quantity))))</var>
+
+                                    </div> <!-- price-wrap .// -->
+                                </td>
+                                <td class="text-right">
+                                    <input type="hidden" value="@item.Product.Id" id="productid" />
+                                    <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
+                                    <a href="" class="btn btn-light" id="removecart"> Remove</a>
+                                    <a href="" class="btn btn-light" id="updatecart"> Update</a>
+                                </td>
+                            </tr>
                                 }
                             }
                             else
@@ -112,27 +128,7 @@
                         </form>
                     </div> <!-- card-body.// -->
                 </div>  <!-- card .// -->
-                <div class="card">
-                    <div class="card-body">
-                        <dl class="dlist-align">
-                            <dt>Total price:</dt>
-                            <dd class="text-right">USD 568</dd>
-                        </dl>
-                        <dl class="dlist-align">
-                            <dt>Discount:</dt>
-                            <dd class="text-right">USD 658</dd>
-                        </dl>
-                        <dl class="dlist-align">
-                            <dt>Total:</dt>
-                            <dd class="text-right  h5"><strong>$1,650</strong></dd>
-                        </dl>
-                        <hr>
-                        <p class="text-center mb-3">
-                            <img src="~/Content/images//misc/payments.png" height="26">
-                        </p>
 
-                    </div> <!-- card-body.// -->
-                </div>  <!-- card .// -->
             </aside> <!-- col.// -->
         </div>
 

@@ -55,6 +55,11 @@ namespace WebsiteBanHang.Controllers
             return View("Index");
         }
 
+        public ActionResult Search()
+        {
+            return View();
+        }
+
         //Login
         [HttpGet]
         public ActionResult Login()

@@ -1,0 +1,47 @@
+﻿@using WebsiteBanHang.Context
+@using WebsiteBanHang.Models
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string key = Request.QueryString["key"];
+    List<Product> result = new List<Product>();
+}
+
+<h2 class="text-danger">Tìm kiếm "@key"</h2>
+
+@{ if (string.IsNullOrEmpty(key))
+    {
+        <h3>Vui long nhap</h3>
+    }
+    else
+    {
+        if (key == "" || key.Length < 3)
+        {
+            <h3>Vui long nhap</h3>
+        }
+        else
+        {
+            result = new ProductDao().SearchByKey(key);
+            <div class="row row-sm">
+                @foreach (var item in result)
+                {
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                        <div href="@Url.Action("Detail","Product", new {Id=item.Id})" class="card card-sm card-product-grid">
+                            <a href="@Url.Action("Detail","Product", new {Id=item.Id})" class="img-wrap"> <img src="~/Content/images/items/@item.Avatar"> </a>
+                            <figcaption class="info-wrap">
+                                @*<a href="#" class="title">@item.Name</a>*@
+                                @Html.ActionLink(item.Name, "Detail", "Product", new { Id = item.Id }, null)
+                                <div class="price mt-1">@item.Price</div> <!-- price-wrap.// -->
+                            </figcaption>
+                        </div>
+                    </div> <!-- col.// -->
+                }
+
+            </div>
+           
+        }
+    }
+
+
+}

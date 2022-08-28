@@ -14,5 +14,10 @@ namespace WebsiteBanHang.Models
         {
             return objWebsiteBanHangEntities.Products.FirstOrDefault(x=>x.Id==Id);
         }
+        public List<Product> SearchByKey(string key)
+        {
+            return objWebsiteBanHangEntities.Products.SqlQuery("Select * From Product Where Name like '%"+key+"%'").ToList();
+        }
     }
+    
 }

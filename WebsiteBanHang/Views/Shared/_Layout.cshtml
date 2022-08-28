@@ -41,16 +41,9 @@
                         </a> <!-- brand-wrap.// -->
                     </div>
                     <div class="col-xl-6 col-lg-5 col-md-6">
-                        <form action="#" class="search-header">
+                        <form action="@Url.Action("Search","Home")" class="search-header" name="timkiem">
                             <div class="input-group w-100">
-                                <select class="custom-select border-right" name="category_name">
-                                    <option value="">All type</option>
-                                    <option value="codex">Special</option>
-                                    <option value="comments">Only best</option>
-                                    <option value="content">Latest</option>
-                                </select>
-                                <input type="text" class="form-control" placeholder="Search">
-
+                                <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="key">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fa fa-search"></i> Search
@@ -69,12 +62,12 @@
                                     </div>
                                     @if(Session["idUser"]!=null)
                                         {
-                                            <a href="Admin/HomeAdmin">Trang Admin</a>
-                                            <a href="Home/Logout">Logout</a>
+                                            <a href="@Url.Action("HomeAdmin","Admin")">Trang Admin</a>
+                                            <a href="@Url.Action("Logout","Home")">Logout</a>
                                         }
                                         else
                                         {
-                                              <a href="Home/Login">Login</a>
+                                              <a href="@Url.Action("Login","Home")">Login</a>
                                         }
                                     @*<small class="text"> My profile </small>*@
                                 </a>

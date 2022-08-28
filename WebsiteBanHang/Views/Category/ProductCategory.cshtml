@@ -239,20 +239,25 @@
                             <option>Most Popular</option>
                             <option>Cheapest</option>
                         </select>
-                        <div class="btn-group">
-                            <a href="page-listing-grid.html"
-                               class="btn btn-light"
-                               data-toggle="tooltip"
-                               title="List view">
-                                <i class="fa fa-bars"></i>
-                            </a>
-                            <a href="page-listing-large.html"
-                               class="btn btn-light active"
-                               data-toggle="tooltip"
-                               title="Grid view">
-                                <i class="fa fa-th"></i>
-                            </a>
-                        </div>
+                        @foreach (var item in Model)
+                        {
+                            <div class="btn-group">
+                                <a href="@Url.Action("ProductList","Category",new {Id=item.Id})"
+                                   class="btn btn-light"
+                                   data-toggle="tooltip"
+                                   title="List view">
+                                    <i class="fa fa-bars"></i>
+                                </a>
+                                <a href="@Url.Action("ProductCategory","Category",new {Id=item.Id})"
+                                   class="btn btn-light active"
+                                   data-toggle="tooltip"
+                                   title="Grid view">
+                                    <i class="fa fa-th"></i>
+                                </a>
+                            </div>
+                            break;
+                        }
+
                     </div>
                 </header>
                 <!-- sect-heading -->
@@ -308,7 +313,7 @@
                             <aside class="col-sm-3">
                                 <div class="info-aside">
                                     <div class="price-wrap">
-                                        <span class="h5 price">@item.Price</span>
+                                        <span class="h5 price">@(String.Format("{0:N0}", @item.Price))</span>
                                         <small class="text-muted">/per item</small>
                                     </div>
                                     <!-- price-wrap.// -->
