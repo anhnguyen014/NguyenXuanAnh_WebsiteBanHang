@@ -87,7 +87,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
                         fileName = fileName + extension;
                         //tenhinh.png
                         objBrand.Avatar = fileName;
-                        objBrand.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/items"),fileName));
+                        objBrand.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/brand"),fileName));
                     }
                     objBrand.CreatedOnUtc = DateTime.Now;
                     objWebsiteBanHangEntities.Brands.Add(objBrand);
@@ -126,7 +126,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
                 fileName = fileName + extension;
                 //tenhinh.png
                 objBrands.Avatar = fileName;
-                objBrands.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/items"), fileName));
+                objBrands.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/brand"), fileName));
             }
            
             objBrands.UpdatedOnUtc = DateTime.Now;
