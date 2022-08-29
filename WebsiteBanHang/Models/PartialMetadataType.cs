@@ -29,4 +29,11 @@ namespace WebsiteBanHang.Context
         [NotMapped]
         public System.Web.HttpPostedFileBase ImageUpload { get; set; }
     }
+
+    [MetadataType(typeof(UserMasterData))]
+    public partial class User
+    {
+        //[NotMapped]
+        //public System.Web.HttpPostedFileBase ImageUpload { get; set; }
+    }
 }
