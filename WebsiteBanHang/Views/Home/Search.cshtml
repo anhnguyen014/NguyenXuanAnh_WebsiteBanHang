@@ -10,18 +10,18 @@
 
 @{ if (string.IsNullOrEmpty(key))
     {
-        <h3>Vui long nhap</h3>
+        <h3>Vui lòng nhập từ khoá để tìm kiếm</h3>
     }
     else
     {
         if (key == "" || key.Length < 3)
         {
-            <h3>Vui long nhap</h3>
+            <h3>Vui lòng nhập từ khoá để tìm kiếm</h3>
         }
         else
         {
             result = new ProductDao().SearchByKey(key);
-            <div class="row row-sm mt-4">
+            <div class="row row-sm p-5">
                 @foreach (var item in result)
                 {
                     <div class="col-xl-2 col-lg-3 col-md-4 col-6">
@@ -37,7 +37,7 @@
                 }
 
             </div>
-           
+
         }
     }
 

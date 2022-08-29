@@ -32,6 +32,23 @@
             return false;
         });
     });
+    function plus() {
+        //lấy giá trị box
+        var t = document.getElementById("ipQuantity").value;
+
+        //cộng thêm 1
+        document.getElementById("ipQuantity").value = parseInt(t) + 1;
+    }
+    function apart() {
+        //lấy giá trị box
+        var t = document.getElementById("ipQuantity").value;
+        if (parseInt(t) > 1)//để không bị âm
+        {
+            //cộng thêm 1
+            document.getElementById("ipQuantity").value = parseInt(t) - 1;
+        }
+
+    }
 </script>
 
 <section class="py-3 bg-light">
@@ -99,7 +116,10 @@
                     <div class="form-row  mt-4">
                         <div class="form-group col-md flex-grow-0">
                             <div class="input-group mb-3 input-spinner">
+                                <button class="bg-success border-0 font-weight-bold" type="submit" onclick="apart();">-</button>
                                 <input type="text" id="ipQuantity" class="form-control" value="1">
+                                <button class="bg-warning border-0 font-weight-bold" type="submit" onclick="plus();">+</button>
+
                             </div>
                         </div> <!-- col.// -->
                         <div class="form-group col-md">

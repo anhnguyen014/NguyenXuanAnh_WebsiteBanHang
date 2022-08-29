@@ -1,0 +1,80 @@
+﻿@model WebsiteBanHang.Context.User
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+    <section class="content my-3">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong style="color:red">XÁC NHẬN XÓA NGƯỜI DÙNG</strong>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="@Url.Action("Edit","Users",  new { id = Model.Id })" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i>Cập Nhật</a>
+                            <a href="@Url.Action("Trash","Users")" class="btn btn-sm btn-info"><i class="fas fa-long-arrow-alt-left"></i>Trở Về Danh Sách</a>
+                            <button class="btn btn-sm btn-danger" type="submit"><i class="fas fa-trash-alt"></i>Xóa</button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th style="width:80px;color:red;text-align:center">Tiêu Đề</th>
+                        <th style="color:green;text-align:center">Nội Dung</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.FirstName)
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.LastName)
+                        </td>
+                   </tr>
+                   
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Email)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Password)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /.card-body -->
+
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+
+
+
+    

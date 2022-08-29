@@ -66,5 +66,23 @@ namespace WebsiteBanHang.Controllers
             Session["count"] = Convert.ToInt32(Session["count"]) - 1;
             return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
         }
+        public JsonResult Update(string cartModel)
+        {
+            var jsonCart=new JavaScriptSerializer().Deserialize<List<CartItem>>(cartModel);
+            var sessionCart = (List<CartItem>)Session["cart"];
+            foreach (var item in sessionCart)
+            {
+                var jsonItem = jsonCart.SingleOrDefault(x => x.Product.Id == item.Product.Id);
+                if(jsonItem != null)
+                {
+                    item.Quantity=jsonItem.Quantity;
+                }
+            }
+            Session["cart"] = sessionCart;
+            return Json(new
+            {
+                status = true
+            }); ;
+        }
     }
 }
