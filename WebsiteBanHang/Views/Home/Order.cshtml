@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebsiteBanHang.Context.Order>
+
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="container">
+    <h2 class="text-danger">Đơn hàng</h2>
+    <div class="content-wrapper">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>
+                    <strong>Tên đơn hàng</strong>
+                </th>
+                <th>
+                    <strong>Mã số người dùng</strong>
+                </th>
+                <th>
+                    <strong>Trạng thái</strong>
+                </th>
+                <th>
+                    <strong>Ngày tạo</strong>
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedOnUtc)
+                    </td>
+
+                </tr>
+            }
+        </table>
+
+    </div>
+</div>

@@ -101,6 +101,12 @@ namespace WebsiteBanHang.Controllers
             return RedirectToAction("Login");
         }
 
+        public ActionResult Order()
+        {
+            var order = objWebsiteBanHangEntities.Orders.ToList();
+            return View(order);
+        }
+
         public static string GetMD5(string str) 
         {
             MD5 md5 = new MD5CryptoServiceProvider();
